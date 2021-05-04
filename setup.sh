@@ -7,7 +7,7 @@ fallocate -l 1G /swapfile # dd if=/dev/zero of=/root/swapfile bs=1M count=2048
 sudo chmod 600 /swapfile
 mkswap /swapfile # 建立swap的文件系统
 swapon /swapfile # 启用swap文件
-echo '\n/swapfile swap swap defaults 0 0\n' > /etc/fstab
+echo '\n/swapfile swap swap defaults 0 0\n' >> /etc/fstab
 
 # install docker
 wget -O - https://get.docker.com | sh
