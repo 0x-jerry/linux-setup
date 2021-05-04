@@ -1,14 +1,13 @@
 #!/bin/sh
 apt update
-apt install git vim -y
+apt install git vim htop -y
 
 # 创建要作为swap分区的文件:增加1GB大小的交换分区，则命令写法如下，其中的count等于想要的块的数量（bs*count=文件大小）。
-dd if=/dev/zero of=/root/swapfile bs=1M count=2048
-# 建立swap的文件系统
-mkswap /root/swapfile
-# 启用swap文件
-swapon /root/swapfile
-# echo '\n/root/swapfile swap swap defaults 0 0\n' > /etc/fstab
+fallocate -l 1G /swapfile # dd if=/dev/zero of=/root/swapfile bs=1M count=2048
+sudo chmod 600 /swapfile
+mkswap /swapfile # 建立swap的文件系统
+swapon /swapfile # 启用swap文件
+echo '\n/swapfile swap swap defaults 0 0\n' > /etc/fstab
 
 # install docker
 wget -O - https://get.docker.com | sh
