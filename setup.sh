@@ -25,7 +25,7 @@ ufw allow 80
 ufw allow 443
 ufw default deny incoming
 systemctl restart ufw.service
-ufw enable
+ufw --force enable
 
 # install oh-my-zsh
 # plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
@@ -33,3 +33,4 @@ apt install zsh curl
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+chsh -s $(which zsh) # change default shell
