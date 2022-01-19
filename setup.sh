@@ -17,8 +17,10 @@ sudo curl -L "https://github.com/docker/compose/releases/download/1.28.5/docker-
 sudo chmod +x /usr/local/bin/docker-compose
 sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 
+# install fail2ban
+apt install fail2ban
 
-#install ufw
+# install ufw
 apt install ufw
 ufw allow 22/tcp
 ufw allow 80
