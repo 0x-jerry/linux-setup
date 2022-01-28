@@ -30,9 +30,13 @@ systemctl restart ufw.service
 ufw --force enable
 
 # install oh-my-zsh
-# plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
 apt install zsh curl
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+
+# install omz plugin
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 chsh -s $(which zsh) # change default shell
+
+omz plugin enable zsh-autosuggestions 
+omz plugin enable zsh-syntax-highlighting
