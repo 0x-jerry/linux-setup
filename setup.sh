@@ -2,18 +2,28 @@
 apt update
 apt install git vim htop -y
 
-# 创建要作为swap分区的文件:增加1GB大小的交换分区，则命令写法如下，其中的count等于想要的块的数量（bs*count=文件大小）。
-fallocate -l 1G /swapfile # dd if=/dev/zero of=/root/swapfile bs=1M count=2048
-sudo chmod 600 /swapfile
-mkswap /swapfile # 建立swap的文件系统
-swapon /swapfile # 启用swap文件
-echo '\n/swapfile swap swap defaults 0 0\n' >> /etc/fstab
+swapPath="/var/swap"
+
+# remove old swap file
+swapoff $swapPath
+rm $swapPath
+
+# create new swap file
+fallocate -l 1G $swapPath 
+chmod 600 $swapPath
+# 建立swap的文件系统
+mkswap $swapPath 
+# 启用swap文件
+swapon $swapPath 
+
+echo "\n$swapPath swap swap defaults 0 0\n" >> /etc/fstab
 
 # install docker
+# https://github.com/docker/docker-install
 wget -O - https://get.docker.com | sh
 
 # install docker-compose
-sudo curl -L "https://github.com/docker/compose/releases/download/1.28.5/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo curl -L "https://github.com/docker/compose/releases/download/latest/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
 sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 
