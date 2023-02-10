@@ -4,9 +4,11 @@ apt install git vim htop -y
 
 swapPath="/var/swap"
 
-# remove old swap file
-swapoff $swapPath
-rm $swapPath
+if [ -f $swapPath ]; then
+    # remove old swap file
+    swapoff $swapPath
+    rm $swapPath
+fi
 
 # create new swap file
 fallocate -l 1G $swapPath 
