@@ -2,24 +2,6 @@
 apt update
 apt install git vim htop -y
 
-swapPath="/var/swap"
-
-if [ -f $swapPath ]; then
-    # remove old swap file
-    swapoff $swapPath
-    rm $swapPath
-fi
-
-# create new swap file
-fallocate -l 1G $swapPath 
-chmod 600 $swapPath
-# 建立swap的文件系统
-mkswap $swapPath 
-# 启用swap文件
-swapon $swapPath 
-
-echo "\n$swapPath swap swap defaults 0 0\n" >> /etc/fstab
-
 # install docker
 # https://github.com/docker/docker-install
 wget -O - https://get.docker.com | sh
