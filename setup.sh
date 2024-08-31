@@ -16,10 +16,10 @@ sudo chmod +x /usr/local/bin/docker-compose
 sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 
 # install fail2ban
-apt install fail2ban
+apt install fail2ban -y
 
 # install ufw
-apt install ufw
+apt install ufw -y
 ufw allow 22/tcp
 ufw allow 80
 ufw allow 443
@@ -28,7 +28,7 @@ systemctl restart ufw.service
 ufw --force enable
 
 # install oh-my-zsh
-apt install zsh curl
+apt install zsh curl -y
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
 # install omz plugin
